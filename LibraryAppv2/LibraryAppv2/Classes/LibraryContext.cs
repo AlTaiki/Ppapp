@@ -12,8 +12,7 @@ namespace LibraryAppv2
     {
         public LibraryContext() 
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated(); 
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +21,7 @@ namespace LibraryAppv2
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var authorEn = modelBuilder.Entity<Author>();
-            authorEn.HasKey();
+            authorEn.HasKey(c => c.Id);
 
             var bookEn = modelBuilder.Entity<Book>();
             bookEn.HasKey(c => c.Id);
@@ -39,7 +38,7 @@ namespace LibraryAppv2
             clientEn.HasKey(c => c.Id);
 
             var debtorsEn = modelBuilder.Entity<Debtors>();
-            debtorsEn.HasOne(b => b.Client).WithMany(b => b.Debtors).HasForeignKey("ClientId").IsRequired();
+            debtorsEn.HasOne(b => b.Client).WithMany(b => b.Debtors).HasForeignKey("ClientId").IsRequired().OnDelete(DeleteBehavior.NoAction);
             debtorsEn.HasOne(b => b.BookIssue).WithMany(b => b.Debtors).HasForeignKey("IssueId").IsRequired();
 
             var genre = modelBuilder.Entity<Genre>();
