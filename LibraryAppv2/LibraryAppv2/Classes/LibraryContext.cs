@@ -21,7 +21,18 @@ namespace LibraryAppv2
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            var authorEn = modelBuilder.Entity<Author>();
+            authorEn.HasKey();
+
+            var bookEn = modelBuilder.Entity<Book>();
+            bookEn.HasKey();
+            bookEn.HasOne(b => b.Author).WithMany(b => b.Books).HasForeignKey("AuthorId").IsRequired();
+            bookEn.HasOne(b => b.Publisher).WithMany(b => b.Books).HasForeignKey("PublisherId").IsRequired();
+            bookEn.HasOne(b => b.Genre).WithMany(b => b.Books).HasForeignKey("GenreId").IsRequired();
+
+            var 
+
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Author> Authors { get; set; }
