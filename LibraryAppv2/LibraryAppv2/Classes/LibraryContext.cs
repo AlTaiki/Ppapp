@@ -16,7 +16,7 @@ namespace LibraryAppv2
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-SSC3ITL\SQLEXPRESS;Database=Library;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-SSC3ITL\SQLEXPRESS;Database=Library;Trusted_Connection=True;");// Где "DESKTOP-SSC3ITL\SQLEXPRESS" Написать имя своего сервера
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
