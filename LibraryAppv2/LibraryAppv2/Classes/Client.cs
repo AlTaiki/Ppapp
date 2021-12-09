@@ -15,5 +15,6 @@ namespace LibraryAppv2
         public string Surname { get; set; }
         public double Phone { get; set; }
         public virtual ICollection<BookIssue> BookIssues { get; set; }
+        public virtual ICollection<Debtors> Debtors { get; set; }
     }
 }

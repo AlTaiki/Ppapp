@@ -25,13 +25,27 @@ namespace LibraryAppv2
             authorEn.HasKey();
 
             var bookEn = modelBuilder.Entity<Book>();
-            bookEn.HasKey();
+            bookEn.HasKey(c => c.Id);
             bookEn.HasOne(b => b.Author).WithMany(b => b.Books).HasForeignKey("AuthorId").IsRequired();
             bookEn.HasOne(b => b.Publisher).WithMany(b => b.Books).HasForeignKey("PublisherId").IsRequired();
             bookEn.HasOne(b => b.Genre).WithMany(b => b.Books).HasForeignKey("GenreId").IsRequired();
 
-            var 
+            var IssuesEn = modelBuilder.Entity<BookIssue>();
+            IssuesEn.HasKey(c => c.Id);
+            IssuesEn.HasOne(b => b.Client).WithMany(b => b.BookIssues).HasForeignKey("ClientId").IsRequired();
+            IssuesEn.HasOne(b => b.Book).WithMany(b => b.BookIssues).HasForeignKey("BookId").IsRequired();
 
+            var clientEn = modelBuilder.Entity<Client>();
+            clientEn.HasKey(c => c.Id);
+
+            var debtorsEn = modelBuilder.Entity<Debtors>();
+            debtorsEn.HasOne(b => b.Client).WithMany(b => b.Debtors).HasForeignKey("ClientId").IsRequired();
+            debtorsEn.HasOne(b => b.BookIssue).WithMany(b => b.Debtors).HasForeignKey("IssueId").IsRequired();
+
+            var genre = modelBuilder.Entity<Genre>();
+            genre.HasKey(c => c.Id);
+
+            modelBuilder.Entity<Publisher>().HasKey(c => c.Id);
 
             base.OnModelCreating(modelBuilder);
         }

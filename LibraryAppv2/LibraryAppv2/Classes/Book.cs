@@ -17,5 +17,6 @@ namespace LibraryAppv2
         public Author Author;
         public Publisher Publisher;
         public Genre Genre;
+        public virtual ICollection<BookIssue> BookIssues { get; set; }
     }
 }
