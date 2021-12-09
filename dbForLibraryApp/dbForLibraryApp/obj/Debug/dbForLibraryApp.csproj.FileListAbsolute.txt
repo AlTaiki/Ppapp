@@ -1,0 +1,2 @@
+C:\Users\mrlyo\OneDrive\Документы\GitHub\Ppapp\dbForLibraryApp\dbForLibraryApp\obj\Debug\dbForLibraryApp.csprojAssemblyReference.cache
+C:\Users\mrlyo\OneDrive\Документы\GitHub\Ppapp\dbForLibraryApp\dbForLibraryApp\obj\Debug\dbForLibraryApp.csproj.CoreCompileInputs.cache
