@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryAppv2.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20211209162951_First_Migration")]
-    partial class First_Migration
+    [Migration("20211209203948_Migration1")]
+    partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,10 @@ namespace LibraryAppv2.Migrations
 
             modelBuilder.Entity("LibraryAppv2.Author", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -50,9 +52,6 @@ namespace LibraryAppv2.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
@@ -67,7 +66,11 @@ namespace LibraryAppv2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId1");
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("GenreId");
+
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("Books");
                 });
@@ -92,6 +95,8 @@ namespace LibraryAppv2.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.HasIndex("ClientId");
 
@@ -134,6 +139,10 @@ namespace LibraryAppv2.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("IssueId");
+
                     b.ToTable("Debtors");
                 });
 
@@ -172,18 +181,67 @@ namespace LibraryAppv2.Migrations
 
             modelBuilder.Entity("LibraryAppv2.Book", b =>
                 {
-                    b.HasOne("LibraryAppv2.Author", null)
+                    b.HasOne("LibraryAppv2.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorId1");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryAppv2.Genre", "Genre")
+                        .WithMany("Books")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryAppv2.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Genre");
+
+                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("LibraryAppv2.BookIssue", b =>
                 {
-                    b.HasOne("LibraryAppv2.Client", null)
+                    b.HasOne("LibraryAppv2.Book", "Book")
+                        .WithMany("BookIssues")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryAppv2.Client", "Client")
                         .WithMany("BookIssues")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("LibraryAppv2.Debtors", b =>
+                {
+                    b.HasOne("LibraryAppv2.Client", "Client")
+                        .WithMany("Debtors")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("LibraryAppv2.BookIssue", "BookIssue")
+                        .WithMany("Debtors")
+                        .HasForeignKey("IssueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BookIssue");
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("LibraryAppv2.Author", b =>
@@ -191,9 +249,31 @@ namespace LibraryAppv2.Migrations
                     b.Navigation("Books");
                 });
 
+            modelBuilder.Entity("LibraryAppv2.Book", b =>
+                {
+                    b.Navigation("BookIssues");
+                });
+
+            modelBuilder.Entity("LibraryAppv2.BookIssue", b =>
+                {
+                    b.Navigation("Debtors");
+                });
+
             modelBuilder.Entity("LibraryAppv2.Client", b =>
                 {
                     b.Navigation("BookIssues");
+
+                    b.Navigation("Debtors");
+                });
+
+            modelBuilder.Entity("LibraryAppv2.Genre", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("LibraryAppv2.Publisher", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
