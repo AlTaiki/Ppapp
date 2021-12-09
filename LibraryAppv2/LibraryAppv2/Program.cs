@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryAppv2
 {
@@ -6,7 +8,11 @@ namespace LibraryAppv2
     {
         static void Main(string[] args)
         {
-            LibraryContext db = new LibraryContext();
+            using (LibraryContext db = new LibraryContext())
+            {
+                var books = (from Book in db.Book.Include(p => p.Author) where Book.AuthorId == 1 select Book);
+            }
+            
         }
     }
 }

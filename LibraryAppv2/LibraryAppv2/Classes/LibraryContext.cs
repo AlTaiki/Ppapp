@@ -48,13 +48,13 @@ namespace LibraryAppv2
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<Book> Books { get; set; }
-        public DbSet<BookIssue> BookIssues { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Debtors> Debtors { get; set; }
+        public DbSet<Author> Author { get; set; }
+        public DbSet<Book> Book { get; set; }
+        public DbSet<BookIssue> BookIssue { get; set; }
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Debtors> Debtor { get; set; }
         public DbSet<Genre> Genre { get; set; }
-        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Publisher> Publisher { get; set; }
 
     }
 }
