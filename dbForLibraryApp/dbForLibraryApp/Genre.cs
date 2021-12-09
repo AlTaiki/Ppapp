@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace dbForLibraryApp
 {
-    public class Book
+    public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int AuthorId { get; set; }
-        public int PublisherId { get; set; }
-        public string ReleaseYear { get; set; }
-        public int GenreId { get; set; }
-
     }
 }

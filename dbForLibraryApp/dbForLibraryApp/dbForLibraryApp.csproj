@@ -46,7 +46,10 @@
     <Compile Include="Author.cs" />
     <Compile Include="AuthorsAndBook.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="BookIssue.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Debtors.cs" />
+    <Compile Include="Genre.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Publisher.cs" />
