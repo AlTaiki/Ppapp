@@ -56,5 +56,6 @@ namespace LibraryAppv2
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
 
+        
     }
 }
