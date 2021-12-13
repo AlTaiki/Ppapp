@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryAppv2
 {
-    public class Debtors
+    public class Debtor
     {
         public int Id { get; set; }
         public int ClientId { get; set; }

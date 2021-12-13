@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace LibraryAppv2.Repository
 {
-    interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         public TEntity Get(int Id);
         public IEnumerable<TEntity> GetAll();

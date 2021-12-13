@@ -128,7 +128,7 @@ namespace LibraryAppv2.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Debtors",
+                name: "Debtor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -179,19 +179,19 @@ namespace LibraryAppv2.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Debtors_ClientId",
-                table: "Debtors",
+                table: "Debtor",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Debtors_IssueId",
-                table: "Debtors",
+                table: "Debtor",
                 column: "IssueId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Debtors");
+                name: "Debtor");
 
             migrationBuilder.DropTable(
                 name: "BookIssues");

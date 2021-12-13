@@ -124,7 +124,7 @@ namespace LibraryAppv2.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("LibraryAppv2.Debtors", b =>
+            modelBuilder.Entity("LibraryAppv2.Debtor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace LibraryAppv2.Migrations
 
                     b.HasIndex("IssueId");
 
-                    b.ToTable("Debtors");
+                    b.ToTable("Debtor");
                 });
 
             modelBuilder.Entity("LibraryAppv2.Genre", b =>
@@ -225,16 +225,16 @@ namespace LibraryAppv2.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("LibraryAppv2.Debtors", b =>
+            modelBuilder.Entity("LibraryAppv2.Debtor", b =>
                 {
                     b.HasOne("LibraryAppv2.Client", "Client")
-                        .WithMany("Debtors")
+                        .WithMany("Debtor")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LibraryAppv2.BookIssue", "BookIssue")
-                        .WithMany("Debtors")
+                        .WithMany("Debtor")
                         .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -256,14 +256,14 @@ namespace LibraryAppv2.Migrations
 
             modelBuilder.Entity("LibraryAppv2.BookIssue", b =>
                 {
-                    b.Navigation("Debtors");
+                    b.Navigation("Debtor");
                 });
 
             modelBuilder.Entity("LibraryAppv2.Client", b =>
                 {
                     b.Navigation("BookIssues");
 
-                    b.Navigation("Debtors");
+                    b.Navigation("Debtor");
                 });
 
             modelBuilder.Entity("LibraryAppv2.Genre", b =>

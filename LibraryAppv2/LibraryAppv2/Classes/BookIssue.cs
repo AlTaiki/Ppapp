@@ -15,6 +15,6 @@ namespace LibraryAppv2
         public DateTime DeliveryDate { get; set; }
         public Client Client;
         public Book Book;
-        public virtual ICollection<Debtors> Debtors { get; set; }
+        public virtual ICollection<Debtor> Debtors { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace LibraryAppv2
             var clientEn = modelBuilder.Entity<Client>();
             clientEn.HasKey(c => c.Id);
 
-            var debtorsEn = modelBuilder.Entity<Debtors>();
+            var debtorsEn = modelBuilder.Entity<Debtor>();
             debtorsEn.HasOne(b => b.Client).WithMany(b => b.Debtors).HasForeignKey("ClientId").IsRequired().OnDelete(DeleteBehavior.NoAction);
             debtorsEn.HasOne(b => b.BookIssue).WithMany(b => b.Debtors).HasForeignKey("IssueId").IsRequired();
 
@@ -52,7 +52,7 @@ namespace LibraryAppv2
         public DbSet<Book> Book { get; set; }
         public DbSet<BookIssue> BookIssue { get; set; }
         public DbSet<Client> Client { get; set; }
-        public DbSet<Debtors> Debtor { get; set; }
+        public DbSet<Debtor> Debtor { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
 
